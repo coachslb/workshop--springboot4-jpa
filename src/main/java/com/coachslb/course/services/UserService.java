@@ -24,4 +24,8 @@ public class UserService {
 
         return optionalUser.orElse(null);
     }
+
+    public User insert(User obj){
+        return userRepository.save(obj);
+    }
 }
