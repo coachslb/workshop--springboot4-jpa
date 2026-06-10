@@ -3,6 +3,7 @@ package com.coachslb.course.services;
 
 import com.coachslb.course.entities.User;
 import com.coachslb.course.repositories.UserRepository;
+import com.coachslb.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> optionalUser = userRepository.findById(id);
-
-        return optionalUser.orElse(null);
+        return optionalUser.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
