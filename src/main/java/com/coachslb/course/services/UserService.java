@@ -32,4 +32,17 @@ public class UserService {
     public void delete(Long id){
         userRepository.deleteById(id);
     }
+
+    public User update(Long id, User userToUpdate) {
+        User entity = userRepository.getReferenceById(id);
+
+        updateData(entity, userToUpdate);
+        return userRepository.save(entity);
+    }
+
+    private void updateData(User entity, User userToUpdate) {
+        entity.setName(userToUpdate.getName());
+        entity.setEmail(userToUpdate.getEmail());
+        entity.setPhone(userToUpdate.getPhone());
+    }
 }
